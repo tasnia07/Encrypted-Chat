@@ -1,4 +1,4 @@
-# Secure P2P Encrypted Chat
+# Encrypted Chat
 
 A modular, terminal-based peer-to-peer chat app that starts simple (plaintext) and can upgrade to a secure session using modern cryptography.
 
@@ -258,6 +258,16 @@ py -3.13 -m pip install --upgrade pip
 py -3.13 -m pip install pycryptodome prompt_toolkit
 ```
 
+### Windows (Venv)
+
+```powershell
+
+pip install --upgrade pip
+python3 -m venv env
+env\Scripts\activate
+(env) pip install pycryptodome prompt_toolkit
+```
+
 ### Linux/macOS
 
 ```bash
@@ -267,26 +277,26 @@ python3 -m pip install pycryptodome prompt_toolkit
 
 ---
 
-## Run (`Code/main.py`)
+## Run (`main.py`)
 
-Open two terminals in the repository root.
+Open two terminals in the repository root. and activate venv if using.
 
 ### Terminal A (listener)
 
 ```bash
-python3 Code/main.py listen 5000 --nick Alice
+python3 main.py listen 5000 --nick Alice
 ```
 
 ### Terminal B (connector)
 
 ```bash
-python3 Code/main.py connect 127.0.0.1 5000 --nick Bob
+python3 main.py connect 127.0.0.1 5000 --nick Bob
 ```
 
 ### Interactive setup mode (optional)
 
 ```bash
-python3 Code/main.py
+python3 main.py
 ```
 
 If no mode is passed, the app prompts for **Listen** or **Connect**, then asks for host/port as needed.
@@ -341,10 +351,10 @@ If no mode is passed, the app prompts for **Listen** or **Connect**, then asks f
 
 ```bash
 # Terminal A (listener)
-python3 Code/main.py listen 5000 --nick Alice
+python3 main.py listen 5000 --nick Alice
 
 # Terminal B (connector)
-python3 Code/main.py connect 127.0.0.1 5000 --nick Bob
+python3 main.py connect 127.0.0.1 5000 --nick Bob
 ```
 
 **Step 2 — Send a plaintext message** (before any key setup)
@@ -422,6 +432,8 @@ Shows session key presence, your handshake role (A/B), pending nonce state, and 
 ![Plaintext packet capture](assets/Packet-Clear.png)
 
 ### 3) Encrypted packet capture
+#### If no packets are showing use 
+```ip.addr == 127.0.0.1 && tcp.port == 5000``` in wireshark filter.
 
 ![Encrypted packet capture](assets/Sec-Packet.png)
 
